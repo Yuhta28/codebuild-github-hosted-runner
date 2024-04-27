@@ -32,7 +32,5 @@ jobs:
           FLYWAY_PASSWORD: $DB_PASSWORD
           FLYWAY_SCHEMAS: test
         run: |
-          echo ${{env.FLYWAY_URL}}
-          echo ${{env.FLYWAY_USER}}
           flyway info
       
