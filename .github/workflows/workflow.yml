@@ -10,14 +10,10 @@ jobs:
   build:
     runs-on: codebuild-github-hosted-runner-connect-${{ github.run_id }}-${{ github.run_attempt }}
 
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_USER: $DB_USER
-          MYSQL_PASSWORD: $DB_PASSWORD
-          MYSQL_HOST: $DB_HOST
-          MYSQL_DATABASE: test
+    env:
+      FLYWAY_URL: jdbc:mysql://$DB_HOST:3306/test
+      FLYWAY_USER: $DB_USER
+      FLYWAY_PASSWORD: $DB_PASSWORD
 
     steps:
       - uses: actions/checkout@v4
@@ -25,12 +21,14 @@ jobs:
       - name: Setup flyway
         run: wget -qO- https://download.red-gate.com/maven/release/com/redgate/flyway/flyway-commandline/10.11.1/flyway-commandline-10.11.1-linux-x64.tar.gz | tar -xvz && sudo ln -s `pwd`/flyway-10.11.1/flyway /usr/local/bin
       
-      - name: Run Flyway Migration
-        env:
-          FLYWAY_URL: jdbc:mysql://$DB_HOST:3306/test
-          FLYWAY_USER: $DB_USER
-          FLYWAY_PASSWORD: $DB_PASSWORD
-          FLYWAY_SCHEMAS: test
+      - name: Run Flyway info
         run: |
           flyway info -url=${{ env.FLYWAY_URL }} -user=${{ env.FLYWAY_USER }} -password=${{ env.FLYWAY_PASSWORD }}
       
+      - name: Run Flyway Migration
+        run: |
+          flyway migrate -url=${{ env.FLYWAY_URL }} -user=${{ env.FLYWAY_USER }} -password=${{ env.FLYWAY_PASSWORD }}
+
+      - name: Run Flyway result
+        run: |
+          flyway info -url=${{ env.FLYWAY_URL }} -user=${{ env.FLYWAY_USER }} -password=${{ env.FLYWAY_PASSWORD }}
