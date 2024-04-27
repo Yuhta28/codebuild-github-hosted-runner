@@ -21,11 +21,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: MySQL Client setup
-        uses: shogo82148/actions-setup-mysql@v1
-        with:
-          mysql-version: "8.0"
+      #- name: Install DB Client
+      #  run: |
+      #    sudo yum update -y && yum install -y mysql-server
 
       - name: DB Connection
-        run: mysql -e "SELECT version()" -u $DB_USER -h $DB_HOST -p$DB_PASSWORD
+      - run: mysql -e "SHOW DATABASES;" -u $DB_USER -h $DB_HOST -p$DB_PASSWORD
 
