@@ -27,10 +27,10 @@ jobs:
       
       - name: Run Flyway Migration
         env:
-          FLYWAY_URL: jdbc:mysql://"$DB_HOST":3306/test
-          FLYWAY_USER: "$DB_USER"
-          FLYWAY_PASSWORD: "$DB_PASSWORD"
+          FLYWAY_URL: jdbc:mysql://$DB_HOST:3306/test
+          FLYWAY_USER: $DB_USER
+          FLYWAY_PASSWORD: $DB_PASSWORD
           FLYWAY_SCHEMAS: test
         run: |
-          flyway info
+          flyway info -url=${{ env.FLYWAY_URL }} -user=${{ env.FLYWAY_USER }} -password=${{ env.FLYWAY_PASSWORD }}
       
