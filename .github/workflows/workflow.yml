@@ -28,3 +28,4 @@ jobs:
       - name: Test DB connection
         run: |
           mysql -e "SHOW DATABASES;" -u $DB_USER -h $DB_HOST -p$DB_PASSWORD
+
