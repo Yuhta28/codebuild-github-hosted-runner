@@ -21,11 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install DB Client
-        run: |
-          sudo apt-get update && apt-get install -y mysql-server
+      - name: MySQL Client setup
+        uses: shogo82148/actions-setup-mysql@v1
+        with:
+          mysql-version: "8.0"
 
-      - name: Test DB connection
-        run: |
-          mysql -e "SHOW DATABASES;" -u $DB_USER -h $DB_HOST -p$DB_PASSWORD
+      - name: DB Connection
+      - run: mysql -e "SELECT version()" -u $DB_USER -h $DB_HOST -p$DB_PASSWORD
 
