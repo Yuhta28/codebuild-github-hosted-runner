@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  FLYWAY_VERSION: 10.11.1
-  DB_NAME: test
-
 jobs:
   build:
     runs-on: codebuild-github-hosted-runner-connect-${{ github.run_id }}-${{ github.run_attempt }}
@@ -36,5 +32,7 @@ jobs:
           FLYWAY_PASSWORD: $DB_PASSWORD
           FLYWAY_SCHEMAS: test
         run: |
+          echo ${{env.FLYWAY_URL}}
+          echo ${{env.FLYWAY_USER}}
           flyway info
       
