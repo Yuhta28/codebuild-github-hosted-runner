@@ -27,7 +27,7 @@ jobs:
 
       - name: Run Flyway info
         run: |
-          flyway clean -url=${{ env.FLYWAY_URL }} -user=${{ env.FLYWAY_USER }} -password=${{ env.FLYWAY_PASSWORD }}
+          flyway clean -url=${{ env.FLYWAY_URL }} -user=${{ env.FLYWAY_USER }} -password=${{ env.FLYWAY_PASSWORD }} -cleanDisabled=true
 
       #- name: Set baseline
       #  run: |
