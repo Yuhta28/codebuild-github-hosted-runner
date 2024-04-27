@@ -27,4 +27,3 @@ jobs:
 
       - name: DB Connection
         run: mysql -e "SHOW DATABASES;" -u $DB_USER -h $DB_HOST -p$DB_PASSWORD
-
