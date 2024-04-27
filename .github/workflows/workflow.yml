@@ -24,6 +24,10 @@ jobs:
       - name: Run Flyway info
         run: |
           flyway info -url=${{ env.FLYWAY_URL }} -user=${{ env.FLYWAY_USER }} -password=${{ env.FLYWAY_PASSWORD }}
+
+      - name: Set baseline
+        run: |
+          flyway baseline -baselineVersion=1.0.0 -baselineDescription="App version 1.0" -url=${{ env.FLYWAY_URL }} -user=${{ env.FLYWAY_USER }} -password=${{ env.FLYWAY_PASSWORD }}
       
       - name: Run Flyway Migration
         run: |
