@@ -27,5 +27,5 @@ jobs:
           mysql-version: "8.0"
 
       - name: DB Connection
-      - run: mysql -e "SELECT version()" -u $DB_USER -h $DB_HOST -p$DB_PASSWORD
+        run: mysql -e "SELECT version()" -u $DB_USER -h $DB_HOST -p$DB_PASSWORD
 
