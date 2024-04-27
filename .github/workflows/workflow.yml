@@ -10,19 +10,19 @@ jobs:
   build:
     runs-on: codebuild-github-hosted-runner-connect-${{ github.run_id }}-${{ github.run_attempt }}
 
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_USER: $DB_USER
-          MYSQL_PASSWORD: $DB_PASSWORD
-          MYSQL_HOST: $DB_HOST
-          MYSQL_DATABASE: test
+#    services:
+#      mysql:
+#        image: mysql:8.0
+#        env:
+#          MYSQL_USER: $DB_USER
+#          MYSQL_PASSWORD: $DB_PASSWORD
+#          MYSQL_HOST: $DB_HOST
+#          MYSQL_DATABASE: test
     steps:
       - uses: actions/checkout@v4
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          sudo /etc/init.d/mysql start
+          sudo apt update && apt install mysql -y
           mysql -e "SHOW DATABASES;" -u $DB_USER -h $DB_HOST -p$DB_PASSWORD
